@@ -864,7 +864,7 @@ void VariantMap::init() {
     add("fischerandom", chess960_variant());
     add("nocastle", nocastle_variant());
     add("fairy", fairy_variant()); // fairy variant used for endgame code initialization
-    add("makruk", makruk_variant());
+    add("makruk", makpong_variant());
     add("makpong", makpong_variant());
     add("cambodian", cambodian_variant());
     add("karouk", karouk_variant());
