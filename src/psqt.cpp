@@ -120,14 +120,14 @@ constexpr Score PBonus[RANK_NB][FILE_NB] =
 
 Score psq[PIECE_NB][SQUARE_NB + 1];
 
+int makpong_leaper_mg = 4200;
+int makpong_leaper_eg = 4700;
+TUNE(SetRange(3500, 7000), makpong_leaper_mg, makpong_leaper_eg);
+
 // init() initializes piece-square tables: the white halves of the tables are
 // copied from Bonus[] adding the piece value, then the black halves of the
 // tables are initialized by flipping and changing the sign of the white scores.
 void init(const Variant* v) {
-
-  int makpong_leaper_mg = 4200;
-  int makpong_leaper_eg = 4700;
-  TUNE(SetRange(3500, 7000), makpong_leaper_mg, makpong_leaper_eg);
 
   PieceType strongestPiece = NO_PIECE_TYPE;
   for (PieceType pt : v->pieceTypes)
