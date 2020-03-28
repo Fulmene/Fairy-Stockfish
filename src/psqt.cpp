@@ -157,8 +157,8 @@ void init(const Variant* v) {
                                  d != NORTH_EAST && d != NORTH_WEST && d != SOUTH_EAST && d != SOUTH_WEST;
                       })
                   && !pi->lameLeaper)
-              score = make_score(mg_value(score) * 5000 / (3500 + mg_value(score)),
-                                 eg_value(score) * 6000 / (3500 + mg_value(score)));
+              score = make_score(mg_value(score) * 4200 / (3500 + mg_value(score)),
+                                 eg_value(score) * 4700 / (3500 + mg_value(score)));
       }
 
       // For drop variants, halve the piece values
