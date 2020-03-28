@@ -125,6 +125,10 @@ Score psq[PIECE_NB][SQUARE_NB + 1];
 // tables are initialized by flipping and changing the sign of the white scores.
 void init(const Variant* v) {
 
+  int makpong_leaper_mg = 4200;
+  int makpong_leaper_eg = 4700;
+  TUNE(SetRange(3500, 7000), makpong_leaper_mg, makpong_leaper_eg);
+
   PieceType strongestPiece = NO_PIECE_TYPE;
   for (PieceType pt : v->pieceTypes)
       if (PieceValue[MG][pt] > PieceValue[MG][strongestPiece])
@@ -157,8 +161,8 @@ void init(const Variant* v) {
                                  d != NORTH_EAST && d != NORTH_WEST && d != SOUTH_EAST && d != SOUTH_WEST;
                       })
                   && !pi->lameLeaper)
-              score = make_score(mg_value(score) * 4200 / (3500 + mg_value(score)),
-                                 eg_value(score) * 4700 / (3500 + mg_value(score)));
+              score = make_score(mg_value(score) * makpong_leaper_mg / (3500 + mg_value(score)),
+                                 eg_value(score) * makpong_leaper_eg / (3500 + mg_value(score)));
       }
 
       // For drop variants, halve the piece values
