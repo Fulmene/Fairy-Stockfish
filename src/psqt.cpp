@@ -158,8 +158,8 @@ void init(const Variant* v) {
       {
           if (std::any_of(pi->stepsCapture.begin(), pi->stepsCapture.end(), [](Direction d) { return dist(d) > 1; })
                   && !pi->lameLeaper)
-              score = make_score(mg_value(score) * 4200 / (3500 + mg_value(score)),
-                                 eg_value(score) * 4700 / (3500 + mg_value(score)));
+              score = make_score(mg_value(score) * 4194 / (3500 + mg_value(score)),
+                                 eg_value(score) * 4831 / (3500 + mg_value(score)));
       }
 
       // For drop variants, halve the piece values
