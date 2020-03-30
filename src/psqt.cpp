@@ -143,19 +143,20 @@ void init(const Variant* v) {
       const PieceInfo* pi = pieceMap.find(pt)->second;
       if (pi->sliderQuiet.size() || pi->sliderCapture.size())
       {
-          int offset = pi->stepsQuiet.size() || pi->stepsCapture.size() ? 16 : 6;
-          score = make_score(mg_value(score) * (v->maxRank + v->maxFile + offset) / (14 + offset),
-                             eg_value(score) * (v->maxRank + v->maxFile + offset) / (14 + offset));
+          constexpr int lc = 5;
+          constexpr int rm = 5;
+          constexpr int r0 = rm + RANK_8;
+          int r1 = rm + (v->maxRank + v->maxFile) / 2;
+          int leaper = pi->stepsQuiet.size() + pi->stepsCapture.size();
+          int slider = pi->sliderQuiet.size() + pi->sliderCapture.size();
+          score = make_score(mg_value(score) * (lc * leaper + r1 * slider) / (lc * leaper + r0 * slider),
+                             eg_value(score) * (lc * leaper + r1 * slider) / (lc * leaper + r0 * slider));
       }
 
       // Increase leapers' value in makpong
       if (v->makpongRule)
-      { 
-          if (std::any_of(pi->stepsCapture.begin(), pi->stepsCapture.end(),
-                      [](Direction d) {
-                          return d != NORTH && d != SOUTH && d != EAST && d != WEST &&
-                                 d != NORTH_EAST && d != NORTH_WEST && d != SOUTH_EAST && d != SOUTH_WEST;
-                      })
+      {
+          if (std::any_of(pi->stepsCapture.begin(), pi->stepsCapture.end(), [](Direction d) { return dist(d) > 1; })
                   && !pi->lameLeaper)
               score = make_score(mg_value(score) * 4200 / (3500 + mg_value(score)),
                                  eg_value(score) * 4700 / (3500 + mg_value(score)));
